@@ -17,8 +17,13 @@ int main()
 	int new_count;
 	for(int t = 0; t<T; t++)
 	{
-		int count_alphabets[26]={0};
-		int new_set[26]={-1};
+		int count_alphabets[26];
+		int new_set[26];
+		for(int n = 0; n<26; n++)
+		{
+			count_alphabets[n] = 0;
+			new_set[n] = -1;
+		}
 		new_count = 0;
 		cin>>S;
 		for(int i = 0; i<S.length(); i++)
@@ -47,13 +52,12 @@ int main()
 					cout<<"Not\n";
 					break;
 				}
-				if((new_set[i] == new_set[i-1] + new_set[i-2]) && (i == new_count-1))
+				else if(i == new_count-1)
 				{
 					cout<<"Dynamic\n";
 				}
 			}
 		}
 	}
-
 	return 0;
 }

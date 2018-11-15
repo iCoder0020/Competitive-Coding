@@ -28,7 +28,6 @@ int main()
 	cin>>N;
 	int A[N];
 	lli dp[N];
-	lli min_dp;
 	for(int n = 0; n<N; n++)
 	{
 		cin>>A[n];
@@ -39,10 +38,6 @@ int main()
 		if(n>=3)
 		{
 			dp[n] += minimum(dp[n-1], dp[n-2], dp[n-3]);
-			if(n == 3)
-			{
-				min_dp = dp[n];
-			}
 		}
 	}
 	cout<<minimum(dp[N-1], dp[N-2], dp[N-3])<<"\n";

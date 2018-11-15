@@ -1,3 +1,9 @@
+/*
+ID: ishan_sang
+PROG: MINSUBAR
+LANG: C++                  
+*/
+
 #include <iostream>
 #include <vector>
 #include <algorithm>

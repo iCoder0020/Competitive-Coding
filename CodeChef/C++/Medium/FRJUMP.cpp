@@ -7,7 +7,7 @@ LANG: C++
 #include <bits/stdc++.h>
 using namespace std;
  
-int mod = 1000000007;
+#define mod  1000000007
  
 int main()
 {
@@ -26,11 +26,11 @@ int main()
     int p,f;
     int R;
     long long enjoyment;
-    long double a;
+    long long temp;
+    int first_digit;
     for(int i = 0; i<Q; i++)
     {
         enjoyment = 1;
-        a=0;
         cin>>choice;
         switch(choice)
         {
@@ -45,10 +45,14 @@ int main()
                 for(int j = 0; j<N; j+=R)
                 {
                     enjoyment = ((enjoyment%mod)*(F[j]%mod))%mod;
-                    a += log10(F[j]);
                 }
-                a = pow(10,a-(int)(a));
-                cout<<(int)(a)<<" "<<enjoyment<<"\n";
+                temp = enjoyment;
+                while(temp)
+                {
+                    first_digit = temp%10;
+                    temp/=10;
+                }
+                cout<<first_digit<<" "<<enjoyment<<"\n";
                 break;
  
             default:
