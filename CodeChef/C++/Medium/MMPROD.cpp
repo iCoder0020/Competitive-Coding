@@ -9,11 +9,17 @@ LANG: C++
 using namespace std;
 
 typedef long long int li;
+
 #define MOD 1000000007
+
+li modded_product(li a, li b)
+{
+	return (((a*b)%MOD + MOD)%MOD);
+}
 
 bool desc(li a, li b)
 {
-	return a>b;
+	return (a>b);
 }
 
 int main()
@@ -22,243 +28,54 @@ int main()
 	cin>>T;
 	for(int t = 0; t<T; t++)
 	{
-		li K,N;
+		int N,K;
 		cin>>N>>K;
-		vector <li> neg;
+
+		li A[N];
 		vector <li> pos;
-		li count_zero = 0;
-		li temp;
-		
-		for(li n = 0; n<N; n++)
+		vector <li> neg;
+		vector <li> zero;
+
+		for(int n = 0; n<N; n++)
 		{
-			cin>>temp;
-			if(temp < 0)
+			cin>>A[n];
+			if(A[n] > 0)
 			{
-				neg.push_back(temp);
+				pos.push_back(A[n]);
 			}
-			else if(temp > 0)
+			else if(A[n] == 0)
 			{
-				pos.push_back(temp);
+				zero.push_back(0);
 			}
 			else
 			{
-				count_zero++;
+				neg.push_back(A[n]);
 			}
 		}
 
-		li pos_index = 0;
-		li neg_index = 0;
-		li pos_product = 1;
-		li neg_product = 1;
-		li product = 1;
-		
-		sort(neg.begin(), neg.end());
-		sort(pos.begin(), pos.end(), desc);
-
-
-		if(K == N)
+		if(zero.size()!=0)
 		{
-			if(count_zero!=0)
+			if 	( 
+				(K > pos.size() + neg.size()) ||
+				((pos.size() == 0) && (K%2 == 1)) ||
+				((K == pos.size() + neg.size()) && (neg.size()%2 == 1))
+				)
 			{
-				product = 0;
-			}
-			else
-			{
-				for(li neg_index = 0; neg_index<neg.size(); neg_index++)
-				{
-					product = ((product%MOD + MOD)%MOD * (neg[neg_index]%MOD + MOD)%MOD)%MOD;
-				}
-				for(li pos_index = 0; pos_index<pos.size(); pos_index++)
-				{
-					product = ((product%MOD + MOD)%MOD * (pos[pos_index]%MOD + MOD)%MOD)%MOD;
-				}
+				cout<<0<<endl;
 			}
 		}
-
-		else if(pos.size()+neg.size()<K)
-		{
-			product = 0;
-		}
-
-		else if(pos.size() == 0)
-		{
-			if(K%2 == 0)
-			{
-				for(li neg_index = 0; neg_index<K; neg_index++)
-				{
-					product = ((product%MOD + MOD)%MOD * (neg[neg_index]%MOD + MOD)%MOD)%MOD;
-				}
-			}
-			else
-			{
-				if(count_zero!=0)
-				{
-					product = 0;
-				}
-				else
-				{
-					for(li neg_index = neg.size()-1; neg_index>=neg.size()-K; neg_index--)
-					{
-						product = ((product%MOD + MOD)%MOD * (neg[neg_index]%MOD + MOD)%MOD)%MOD;
-					}
-				}
-			}
-		}
-
-		else if(neg.size() == 0)
-		{
-			for(li pos_index = 0; pos_index<K; pos_index++)
-			{
-				product = ((product%MOD + MOD)%MOD * (pos[pos_index]%MOD + MOD)%MOD)%MOD;
-			}
-		}
-
-		else if(neg.size() == 1)
-		{
-			if(pos.size() < K)
-			{
-				if(count_zero!=0)
-				{
-					product = 0;
-				}
-				else
-				{
-					product = ((product%MOD + MOD)%MOD * (neg[0]%MOD + MOD)%MOD)%MOD;
-					for(li pos_index = pos.size()-1; pos_index>=pos.size()-K+1; pos_index--)
-					{
-						product = ((product%MOD + MOD)%MOD * (pos[pos_index]%MOD + MOD)%MOD)%MOD;
-					}
-				}
-			}
-			else
-			{
-				for(li pos_index = 0; pos_index<K; pos_index++)
-				{
-					product = ((product%MOD + MOD)%MOD * (pos[pos_index]%MOD + MOD)%MOD)%MOD;
-				}
-			}
-		}
-
 		else
 		{
-			while(K)
-			{
-				pos_product = 1;
-				neg_product = 1;
-				if(K == 1)
-				{
-					if(pos_index < pos.size())
-					{
-						product = ((product%MOD + MOD)%MOD * (pos[pos_index]%MOD + MOD)%MOD)%MOD;
-						pos_index++;
-					}
-					else if(count_zero!=0)
-					{
-						product = 0;
-					}
-					else
-					{
-						product = neg[neg.size()-1];
-						for(li pos_index = pos.size()-1; pos_index>=pos.size()-K+1; pos_index--)
-						{
-							product = ((product%MOD + MOD)%MOD * (pos[pos_index]%MOD + MOD)%MOD)%MOD;
-						}
-					}
-					K--;
-				}
-				
-				else if(K == 3)
-				{
-					if(neg_index+1 <= neg.size()-1)
-					{
-						neg_product = ((neg[neg_index]%MOD + MOD)%MOD * (neg[neg_index+1]%MOD + MOD)%MOD)%MOD;
-						if(pos_index+1 <= pos.size()-1)
-						{
-							if(neg_product > pos[pos_index+1])
-							{
-								product = ((product%MOD + MOD)%MOD * (neg_product%MOD + MOD)%MOD)%MOD;
-								product = ((product%MOD + MOD)%MOD * (pos[pos_index]%MOD + MOD)%MOD)%MOD;
-								pos_index++;
-								neg_index += 2;
-							}
-							else
-							{
-								pos_product = (pos[pos_index]%MOD * pos[pos_index+1]%MOD)%MOD;
-								product = ((product%MOD + MOD)%MOD * (pos_product%MOD + MOD)%MOD)%MOD;
-								product = ((product%MOD + MOD)%MOD * (pos[pos_index+2]%MOD + MOD)%MOD)%MOD;
-								pos_index += 3;
-							}
-						}
-						else
-						{
-							product = ((product%MOD + MOD)%MOD * (neg_product%MOD + MOD)%MOD)%MOD;
-							product = ((product%MOD + MOD)%MOD * (pos_product%MOD + MOD)%MOD)%MOD;
-							pos_index++;
-							neg_index += 2;
-						}
-					}
-					else if(pos_index+2 <= pos.size()-1)
-					{
-						pos_product = (pos[pos_index]%MOD * pos[pos_index+1]%MOD)%MOD;
-						product = ((product%MOD + MOD)%MOD * (pos_product%MOD + MOD)%MOD)%MOD;
-						product = ((product%MOD + MOD)%MOD * (pos[pos_index+2]%MOD + MOD)%MOD)%MOD;
-						pos_index += 3;
-					}
-					else
-					{
-						product = 0;
-					}
-					K -= 3;
-				}
+			sort(pos.begin(), pos.end(), desc);
+			sort(neg.begin(), neg.end());
 
-				else
-				{
-					if(neg_index == neg.size() || neg_index == neg.size()-1)
-					{
-						if(pos_index+(K-1) <= pos.size()-1)
-						{
-							while(K)
-							{
-								product = ((product%MOD + MOD)%MOD * (pos[pos_index]%MOD + MOD)%MOD)%MOD;
-								pos_index++;
-								K--;
-							}
-							pos_index += K;
-							K = 2;
-						}
-						else
-						{
-							product = 0;
-						}
-					}
-					else if((neg.size()-neg_index) >= 2)
-					{
-						neg_product = ((neg[neg_index]%MOD + MOD)%MOD * (neg[neg_index+1]%MOD + MOD)%MOD)%MOD;
-						if(pos_index+1 <= pos.size()-1)
-						{
-							pos_product = (pos[pos_index]%MOD * pos[pos_index+1]%MOD)%MOD;
-							if(pos_product > neg_product)
-							{
-								product = ((product%MOD + MOD)%MOD * (pos_product%MOD + MOD)%MOD)%MOD;
-								pos_index += 2;
-							}
-							else
-							{
-								product = ((product%MOD + MOD)%MOD * (neg_product%MOD + MOD)%MOD)%MOD;
-								neg_index += 2;
-							}
-						}
-						else
-						{
-							product = ((product%MOD + MOD)%MOD * (neg_product%MOD + MOD)%MOD)%MOD;
-							neg_index += 2;
-						}
-					}
-					K -= 2;
-				}
-			}
+			li product = 1;
+
+			int pos_index = 0;
+			int neg_index = 0;
+
+			
 		}
-		cout<<(product%MOD + MOD)%MOD<<"\n";
 	}
 	return 0;
 }

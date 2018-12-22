@@ -10,7 +10,8 @@ LANG: C++
 
 using namespace std;
 
-int days(int year, int month){
+int days(int year, int month)
+{
 	if(month==2)
 	{	
 		if((year%4==0&&year%100!=0)||(year%400==0))
@@ -32,9 +33,10 @@ int days(int year, int month){
 	}
 }
 
-int main(){
+int main()
+{
 	ofstream fout("friday.out");
-    	ifstream fin("friday.in");
+    ifstream fin("friday.in");
 	int i=1,year,n,week_day[7],day,month;
 	fin>>n;
 	for(int j=0;j<7;j++)

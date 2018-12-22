@@ -8,43 +8,85 @@ LANG: C++
 
 using namespace std;
 
-typedef long long int lli;
-
 int main()
 {
 	int N;
 	cin>>N;
-	vector <int> A;
-	vector <int> B;
-	int C;
-	int temp;
+	int A[N];
+	int dp[N];
 	for(int n = 0; n<N; n++)
 	{
-		cin>>temp;
-		A.push_back(temp);
+		dp[n] = 300;
 	}
-	if(N == 1)
+	vector <vector<int>> plength;
+	vector <int> initial(1, 1);
+	for(int n = 0; n<N; n++)
 	{
-		C = 1;
+		plength.push_back(initial);
 	}
-	else
+	for(int n = 0; n<N; n++)
 	{
-		int l,r;
-		int length;
-		int max_length;
-		int l_max = -1;
-		int r_max = -1;
-		for(int n = 0; n<A.size(); n++)
+		cin>>A[n];
+	}
+	for(int n = 0; n<N; n++)
+	{
+		int i = n-1;
+		int j = n+1;
+		int count = 1;
+		while(i>=0 && j<N)
 		{
-			for(l = n-1,r = n+1; l>=0, r<A.size(); l--,r++)
+			if(A[i] == A[j])
 			{
-				if(A[l] == A[r])
+				count+=2;
+				plength[i].push_back(count);
+			}
+			else
+			{
+				break;
+			}
+			i--;
+			j++;
+		}
+	}
+	for(int n = 0; n<N-1; n++)
+	{
+		if(A[n] == A[n+1])
+		{
+			plength[n].push_back(2);
+			int i = n-1;
+			int j = n+2;
+			int count = 2;
+			while(i>=0 && j<N)
+			{
+				if(A[i] == A[j])
 				{
-
+					count+=2;
+					plength[i].push_back(count);
 				}
+				else
+				{
+					break;
+				}
+				i--;
+				j++;
 			}
 		}
 	}
-	cout<<C<<endl;
+	dp[N-1] = 1;
+	for(int n = N-2; n>=0; n--)
+	{
+		for(int m = 0; m<plength[n].size(); m++)
+		{
+			if(n + plength[n][m] >= N)
+			{
+				dp[n] = 1;
+			}
+			else
+			{
+				dp[n] = min(dp[n], 1 + dp[n + plength[n][m]]);
+			}
+		}
+	}
+	cout<<dp[0]<<endl;
 	return 0;
 }

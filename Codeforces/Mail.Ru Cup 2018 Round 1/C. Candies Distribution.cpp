@@ -4,7 +4,7 @@ PROG: Candies Distribution
 LANG: C++                  
 */
 
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 

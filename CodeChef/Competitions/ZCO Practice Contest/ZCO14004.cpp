@@ -10,9 +10,20 @@ using namespace std;
 
 typedef long long int lli;
 
-lli max(lli a, lli b)
+lli max(lli a, lli b, lli c)
 {
-	return (a>b)?a:b;
+	if(a>b && a>c)
+	{
+		return a;
+	}
+	else if(b>c)
+	{
+		return b;
+	}
+	else
+	{
+		return c;
+	}
 }
 
 int main()
@@ -20,52 +31,41 @@ int main()
 	int N;
 	cin>>N;
 	int A[N];
-	lli dp[N] = {0};
-	for(int n = 0; n<N; n++)
-	{
-		dp[n] = -1;
-	}
-	int current_length;
+	lli dp[N][3];
 	for(int n = 0; n<N; n++)
 	{
 		cin>>A[n];
 	}
-	dp[0] = A[0];
-	if(N == 1)
+	if(N <= 2)
 	{
-		cout<<dp[0]<<endl;
+		lli sum = 0;
+		for(int n = 0; n<N; n++)
+		{
+			sum += A[n];
+		}
+		cout<<sum<<endl;
 	}
 	else
 	{
-		dp[1] = A[0] + A[1];
-		current_length = 2;
-		for(int n = 2; n<N; n++)
+		dp[N-1][0] = 0;
+		dp[N-1][1] = A[N-1];
+		dp[N-1][2] = A[N-1];
+
+		dp[N-2][0] = A[N-1];
+		dp[N-2][1] = A[N-2];
+		dp[N-2][2] = A[N-1] + A[N-2];
+
+		dp[N-3][0] = A[N-1] + A[N-2];
+		dp[N-3][1] = A[N-1] + A[N-3];
+		dp[N-3][2] = A[N-2] + A[N-3];
+
+		for(int n = N-4; n>=0; n--)
 		{
-			if(dp[n] == -1)
-			{
-				dp[n] = A[n];
-				if(dp[n-2] >= A[n-1])
-				{
-					dp[n] += dp[n-2];
-					current_length = 1;
-					if(n+1 < N)
-					{
-						dp[n+1] = A[n+1] + dp[n];
-						current_length = 2;
-					}
-				}
-				else
-				{
-					dp[n] += A[n-1];
-					current_length = 2;
-				}
-			}
+			dp[n][0] = max(dp[n+1][0], dp[n+1][1], dp[n+1][2]);
+			dp[n][1] = max(dp[n+2][0], dp[n+2][1], dp[n+2][2]) + A[n];
+			dp[n][2] = max(dp[n+3][0], dp[n+3][1], dp[n+3][2]) + A[n] + A[n+1];
 		}
-		for(int n = 0; n<N; n++)
-		{
-			cout<<n<<": "<<dp[n]<<endl;
-		}
-		cout<<max(dp[N-1], dp[N-2])<<endl;
+		cout<<max(max(dp[0][0], dp[0][1], dp[0][2]),max(dp[1][0], dp[1][1], dp[1][2]),max(dp[2][0], dp[2][1], dp[2][2]))<<endl;
 	}
 	return 0;
 }
