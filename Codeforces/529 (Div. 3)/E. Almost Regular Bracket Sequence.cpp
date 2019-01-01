@@ -1,6 +1,6 @@
 /*
-ID: icoder_0020
-PROG: AIBOHP
+ID: iCoder0020
+PROG: Almost Regular Bracket Sequence
 LANG: C++                  
 */
 
@@ -10,12 +10,10 @@ using namespace std;
 
 int main()
 {
-	int T;
+	int N;
 	string S;
-	for(int t = 0; t<T; t++)
-	{
-		cin>>S;
-
-	}
+	cin>>N;
+	cin>>S;
+	
 	return 0;
 }

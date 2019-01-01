@@ -1,10 +1,10 @@
 /*
-ID: icoder_0020
-PROG: 
+ID: iCoder0020
+PROG: Minimum Diameter Tree
 LANG: C++                  
 */
 
-#include <iostream>
+#include <bits/stdc++.h>
 
 using namespace std;
 

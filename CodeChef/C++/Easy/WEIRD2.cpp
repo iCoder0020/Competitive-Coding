@@ -1,4 +1,4 @@
-	/*
+/*
 ID: ishan_sang
 PROG: WEIRD2
 LANG: C++                  

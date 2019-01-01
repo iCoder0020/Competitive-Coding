@@ -1,6 +1,6 @@
 /*
-ID: icoder_0020
-PROG: AIBOHP
+ID:266214DN
+PROG: A+B Problem
 LANG: C++                  
 */
 
@@ -8,14 +8,12 @@ LANG: C++
 
 using namespace std;
 
+typedef long long int li;
+
 int main()
 {
-	int T;
-	string S;
-	for(int t = 0; t<T; t++)
-	{
-		cin>>S;
-
-	}
+	li a,b;
+	cin>>a>>b;
+	cout<<a+b<<endl;
 	return 0;
 }

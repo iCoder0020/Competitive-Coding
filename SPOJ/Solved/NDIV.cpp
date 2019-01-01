@@ -31,7 +31,7 @@ int main()
 		{
             if(j>1 && i*j-A>=0)
             {
-            	if(i == j)
+            	if(i == j || j<=sqrt(B))
             	{
             		ARR[i*j-A]++;
             	}
@@ -44,7 +44,6 @@ int main()
 	}
 	for(int i = 0; i<=B-A; i++)
 	{
-		cout<<i+A<<" "<<ARR[i]<<endl;
 		if(ARR[i] == N)
 		{
 			count++;
