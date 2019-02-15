@@ -4,63 +4,69 @@ PROG: MAXEP
 LANG: C++
 */
 
-#include <iostream>
+#include <bits/stdc++.h>
  
 using namespace std;
- 
+
+void ask(int V)
+{
+	cout<<"1 "<<V<<endl;
+}
+
+void repair()
+{
+	cout<<"2 "<<endl;
+}
+
+void answer(int ans)
+{
+	cout<<"3 "<<ans<<endl;
+}
+
 int main()
 {
     int N,c;
     cin>>N>>c;
-    int guess = 1;
-    int broken;
-    bool got_answer = false;
-    int inc = max(N/250, 1);
-    while(1)
+    int balance = 1000;
+    int min = 1;
+    int max = N;
+    int guess;
+    int input;
+    bool found = false;
+    while(!found)
     {
-        cout<<1<<" "<<guess<<endl;
-        cin>>broken;
-        if(broken == 1)
-        {
-            cout<<2<<endl;
-            if(guess == 1)
-            {
-                cout<<3<<" "<<guess<<endl;
-                got_answer = true;
-            }
-            else
-            {
-                if(inc != 1)
-                {
-                    for(int i = guess-(inc-1); i<=guess; i++)
-                    {
-                        cout<<1<<" "<<i<<endl;
-                        cin>>broken;
-                        if(broken == 1)
-                        {
-                            cout<<2<<endl;
-                            got_answer = true;
-                            cout<<3<<" "<<i<<endl;
-                            break;
-                        }
-                    }
-                }
-                else
-                {
-                    got_answer = true;
-                    cout<<3<<" "<<guess<<endl;
-                    break;
-                }
-            }
-        }
-        if(got_answer)
-        {
-            break;
-        }
-        else
-        {
-            guess += inc;
-        }
+    	if(max-min+1 <= balance - c)
+    	{
+    		for(guess = min; guess<=max; guess++)
+    		{
+    			ask(guess);
+    			cin>>input;
+    			if(input == 1)
+    			{
+    				repair();
+    				found = true;
+    				break;
+    			}
+    		}
+    	}
+    	else
+    	{
+    		guess = (9*min + max)/10;
+    		ask(guess);
+    		cin>>input;
+    		if(input == 0)
+    		{
+    			min = guess + 1;
+    			balance--;
+    		}
+    		else
+    		{
+    			repair();
+    			max = guess;
+    			balance -= c+1;
+    		}
+    	}
     }
+    answer(guess);
     return 0;
 } 
