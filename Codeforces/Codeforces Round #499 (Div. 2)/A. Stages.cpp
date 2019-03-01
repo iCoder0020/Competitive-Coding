@@ -27,7 +27,7 @@ int main()
 		{
 			index++;
 		}
-		if(index == 26)
+		if(index >= 26)
  		{
  			answer = -1;
  			break;
@@ -35,11 +35,6 @@ int main()
  		answer += (index+1);
  		index += 2;
 		K--;
-		if(index >=25 && K>0)
-		{
-			answer = -1;
-			break;
-		}
 	}
 	cout<<answer<<"\n";
 	return 0;
