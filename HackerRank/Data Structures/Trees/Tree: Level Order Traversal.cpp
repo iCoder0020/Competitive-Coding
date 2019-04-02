@@ -1,10 +1,10 @@
 /*
 ID: iCoder0020
-PROG: Tree : Top View
+PROG: Tree: Level Order Traversal
 LANG: C++                  
 */
 
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>	
 
 using namespace std;
 
@@ -22,7 +22,7 @@ class Node {
 
 class Solution {
     public:
-        Node* insert(Node* root, int data) {
+  		Node* insert(Node* root, int data) {
             if(root == NULL) {
                 return new Node(data);
             } else {
@@ -38,38 +38,35 @@ class Solution {
                return root;
            }
         }
+/*
+class Node {
+    public:
+        int data;
+        Node *left;
+        Node *right;
+        Node(int d) {
+            data = d;
+            left = NULL;
+            right = NULL;
+        }
+};
+*/
 
-    void topView(Node * root) 
+    void levelOrder(Node * root) 
     {
-        queue <pair<Node*, int>>Q;
-        map<int, Node*> M;
-        M[0] = root;
-        Q.push({root,0});
+        queue <Node*>Q;
+
+        Q.push(root);
+
         while(!Q.empty())
         {
-            Node* temp = Q.front().first;
-            int disp = Q.front().second;
-            Q.pop();
+            Node * temp = Q.front();
+            cout<<temp->data<<" ";
             if(temp->left)
-            {
-                Q.push({temp->left, disp-1});
-                if(M.find(disp-1) == M.end())
-                {
-                    M[disp-1] = temp->left;
-                }
-            }
+                Q.push(temp->left);
             if(temp->right)
-            {
-                Q.push({temp->right, disp+1});
-                if(M.find(disp+1) == M.end())
-                {
-                    M[disp+1] = temp->right;
-                }
-            }
-        }
-        for(auto it: M)
-        {
-            cout<<it.second->data<<" ";
+                Q.push(temp->right);
+            Q.pop();
         }
     }
 
@@ -90,6 +87,6 @@ int main() {
         root = myTree.insert(root, data);
     }
   
-    myTree.topView(root);
+	myTree.levelOrder(root);
     return 0;
 }

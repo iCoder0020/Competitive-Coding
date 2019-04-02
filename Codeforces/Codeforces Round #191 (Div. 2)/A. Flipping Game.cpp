@@ -8,46 +8,38 @@ LANG: C++
 
 using namespace std;
 
+int get_answer(vector<int> A, int i, int j)
+{
+	int N = A.size();
+	int max_count = 0;
+	for(int n = i; n<=j; n++)
+	{
+		A[n] = 1-A[n];
+	}
+	for(int n = 0; n<N; n++)
+		if(A[n] == 1)
+			max_count++;
+	// cout<<i<<" "<<j<<" "<<max_count<<endl;
+	return max_count;
+}
+
 int main()
 {
 	int N;
 	cin>>N;
-	int A[N];
-	for(int n = 0; n<N; n++)
-	{
-		cin>>A[n];
-	}
+	vector<int> A(N);
 	int count = 0;
 	int max_count = 0;
-	int i,j;
-	i = 0;
-	j = 0;
 	for(int n = 0; n<N; n++)
+		cin>>A[n];
+	for(int i = 0; i<N; i++)
 	{
-		if(A[n] == 1)
+		for(int j = i; j<N; j++)
 		{
-			j++;
-			count = j-i;
+			count = get_answer(A, i, j);
+			max_count = max(count, max_count);
 		}
-		else
-		{
-			while(n<N && A[n] != 1)
-			{
-				n++;
-			}
-			if(n == N)
-			{
-				count = n-i;
-			}
-			else
-			{
-				count = n-i+1;
-			}
-			i = n;
-		}
-		max_count = max(count, max_count);
 	}
-	max_count = max(count, max_count);
 	cout<<max_count<<endl;
 	return 0;
 }
