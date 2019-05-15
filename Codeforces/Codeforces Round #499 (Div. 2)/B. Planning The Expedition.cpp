@@ -4,8 +4,7 @@ PROG: Planning The Expedition
 LANG: C++                  
 */
 
-#include <iostream>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
 
