@@ -22,13 +22,9 @@ int main()
 		int minm = min(exams[n].first, exams[n].second);
 		int maxm = max(exams[n].first, exams[n].second);
 		if(day <= minm)
-		{
 			day = minm;
-		}
 		else
-		{
 			day = maxm;
-		}
 	}
 	cout<<day<<endl;
 	return 0;
