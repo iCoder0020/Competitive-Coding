@@ -1,0 +1,1 @@
+{"name":"Local: A","url":"/home/ishan/Documents/Competitive-Coding/CF/CGR14/A.cpp","tests":[{"id":1619965747333,"input":"3\n3 2\n3 2 1\n5 3\n1 2 3 4 8\n1 5\n5\n","output":"YES\n3 2 1\nYES\n8 1 2 3 4\nNO\n"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/ishan/Documents/Competitive-Coding/CF/CGR14/A.cpp","group":"local","local":true}
