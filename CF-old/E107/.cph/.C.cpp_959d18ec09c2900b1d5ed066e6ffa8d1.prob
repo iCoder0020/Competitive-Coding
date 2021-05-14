@@ -1,0 +1,1 @@
+{"name":"Local: C","url":"/home/ishan/Documents/Competitive-Coding/CF/E107/C.cpp","tests":[{"id":1619025525155,"input":"7 5\n2 1 1 4 3 3 1\n3 2 1 1 4\n","output":"5 2 3 1 5 "}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/ishan/Documents/Competitive-Coding/CF/E107/C.cpp","group":"local","local":true}
