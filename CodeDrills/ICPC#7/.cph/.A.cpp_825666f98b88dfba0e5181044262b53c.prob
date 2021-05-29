@@ -1,0 +1,1 @@
+{"name":"Local: A","url":"/home/ishan/Documents/Competitive-Coding/CodeDrills/ICPC#7/A.cpp","tests":[{"id":1621947907112,"input":"3\n4 3 3\n1 2 3 4\n4 3 3\n4 3 2 1\n4 2 1\n2 1 2 3","output":"YES\nNO\nMAYBE"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/ishan/Documents/Competitive-Coding/CodeDrills/ICPC#7/A.cpp","group":"local","local":true}
