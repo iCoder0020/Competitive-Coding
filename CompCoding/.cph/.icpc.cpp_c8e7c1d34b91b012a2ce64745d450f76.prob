@@ -1,0 +1,1 @@
+{"name":"Local: icpc","url":"/home/ishan/Documents/Competitive-Coding/CompCoding/icpc.cpp","tests":[{"id":1628339906961,"input":"2\n3 4 5\n3 4 500","output":"YES\n10 17\n10 14\n13 15\nNO"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/ishan/Documents/Competitive-Coding/CompCoding/icpc.cpp","group":"local","local":true}

@@ -1,0 +1,1 @@
+{"name":"Local: abc","url":"/home/ishan/Documents/Competitive-Coding/CF/abc.cpp","tests":[{"id":1622354019217,"input":"9 3 10\n640 435 647 352 8 90 960 329 859 ","output":"17220"}],"interactive":false,"memoryLimit":1024,"timeLimit":3000,"srcPath":"/home/ishan/Documents/Competitive-Coding/CF/abc.cpp","group":"local","local":true}
